@@ -1,0 +1,5 @@
+EXP 2 creation and use of access key :cmd/cloud shell/hyper
+aws configure
+aws iam create-group --group-name exp2group
+aws iam create-user --user-name exp2user
+aws iam add-user-to-group --user-name exp2user --group-name exp2group
