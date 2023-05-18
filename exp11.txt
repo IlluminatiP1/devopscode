@@ -1,0 +1,15 @@
+EXP 11 Installation of K8s and deploying Kubeadm : powershell/cmd
+
+kubectl version --short
+
+kubectl create deployment nginx --image=nginx
+
+kubectl get deployments
+
+kubectl expose deployment nginx --port=80 --type=LoadBalancer
+
+kubectl get services
+
+kubectl delete services nginx
+
+kubectl delete deployment nginx
