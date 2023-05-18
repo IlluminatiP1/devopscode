@@ -1,0 +1,11 @@
+EXP 10 Installation of docker and playing with a image : powershell/cmd
+
+docker --version
+
+docker pull nginx
+
+docker run -d -p 80:80 nginx
+
+docker ps
+
+docker stop <conatiner-id>
