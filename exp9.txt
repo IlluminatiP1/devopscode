@@ -1,0 +1,65 @@
+EXP 9 Installation of ansible and Deploying webpage to remote apache server :wsl
+
+ansible --version
+
+mkdir exp9
+cd exp9
+touch playbook.yml
+touch index.html.j2
+nano index.html.j2
+nano playbook.yml
+
+playbook.yml
+
+---
+- name: Install and configure web server
+  hosts: localhost
+  connection: local
+  become: true
+
+  tasks:
+    - name: Install Apache web server
+      apt:
+        name: apache2
+        state: present
+      tags: [web]
+
+    - name: Create index.html file
+      template:
+        src: index.html.j2
+        dest: /var/www/html/index.html
+      tags: [web]
+
+    - name: Set ownership and permissions on index.html
+      file:
+        path: /var/www/html/index.html
+        owner: www-data
+        group: www-data
+        mode: '0644'
+      tags: [web]
+
+  handlers:
+    - name: restart apache2
+      service:
+        name: apache2
+        state: restarted
+
+
+index.html.j2
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MY WEBPAGE</title>
+</head>
+<body>
+    HELLO , THIS IS exp9
+</body>
+</html>
+
+ansible-playbook playbook.yml
+
+sudo systemctl stop apache2
