@@ -1,0 +1,11 @@
+EXP 6 Configuring network to start and stop automatically at boot(configuring httpd) :wsl 
+
+ps --pid 1
+sudo systemctl list-unit-files --state=disabled
+sudo systemctl list-unit-files --state=enabled
+sudo apt-get install apache2
+sudo update-rc.d apache2 enable
+sudo service apache2 start
+sudo service apache2 status
+sudo service apache2 stop
+sudo update-rc.d apache2 disable
